@@ -22,4 +22,13 @@ public class main {
         mcLautaro.listaDeQuimicos();
         mcLautaro.listaProductosPorCalificacionDePeligro(5);
     }
+
+    private String documentacionProyecto()
+    {
+        String claseA = "fabrica";
+        String claseB = "Area";
+
+
+
+    }
 }
