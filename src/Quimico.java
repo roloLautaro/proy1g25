@@ -55,4 +55,5 @@ public class Quimico {
     public void setEfectividad(int efectividad) {
         this.efectividad = efectividad;
     }
+
 }

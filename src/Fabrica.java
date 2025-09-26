@@ -72,7 +72,15 @@ public class Fabrica {
 
     public void listaDeQuimicos()
     {
-
+        System.out.println("Listado productos Quimicos");
+        NodoQuimicos aux = headQuimicos;
+        while (aux != null)
+        {
+            System.out.println("["+aux.getData().getCodigo()+"-"+aux.getData().getNombre()+"]");
+            aux = aux.getNext();
+        }
     }
+
+
 
 }
