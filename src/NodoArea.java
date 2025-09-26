@@ -2,6 +2,9 @@ public class NodoArea {
     private Area data;
     private NodoArea next;
 
+    public NodoArea(Area data){
+        this.data = data;
+    }
     public NodoArea(Area data, NodoArea next)
     {
         this.data = data;
