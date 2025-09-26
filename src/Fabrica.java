@@ -2,6 +2,8 @@ public class Fabrica {
     // creamos los head para la cracion de las Areas y otro head para el listado de los productos quimicos sin repetirn
     private NodoQuimicos headQuimicos; // este head es para crear la lista de los productos
     private NodoArea headArea; // las areas de produccion de los quimicos (pila de quimicos fabricados)
+    private int totalQuimcSens;
+
 
     private boolean verficarProducto(Quimico q) // este metodo nos ayuda a verificar si ya esta el elemeto registrado
     {
@@ -61,8 +63,14 @@ public class Fabrica {
         while(aux != null)
         {
             if (aux.getData().getCodigo().equals(idArea)){
-                aux.getData().pushQuimico(q);
-                agregarProducto(q);
+
+                aux.getData().pushQuimico(q); // se agrega a la area designada en forma de pila
+
+                agregarProducto(q); // se registra en el listado head
+
+                if(q instanceof QuimicosSensible) // contador de quimicos sensible
+                    totalQuimcSens++;
+
                 return true;
             }
             aux = aux.getNext();
@@ -101,6 +109,9 @@ public class Fabrica {
         if (eliminado == null)
             return false; // no se encontró el producto quimico en esa área
 
+        if (eliminado instanceof QuimicosSensible)
+            totalQuimcSens--;
+
         //3) verificar si exite mas producto en otras áreas
         if(!existeEnArea(codigoQuimico))
             eliminarDelListado(codigoQuimico);
@@ -137,5 +148,50 @@ public class Fabrica {
             actual = actual.getNext();
         }
     }
+
+    public int getTotalQuimcSens()
+    {
+        return totalQuimcSens;
+    }
+
+    public void buscarProducto(String codigo){
+        int cantidad = 0;
+        Quimico busqueda = null;
+
+        NodoArea aux = headArea;
+        while (aux != null)
+        {
+            Area a = aux.getData();
+            NodoQuimicos auxQui = a.getTop(); // accedemos al top de la pila
+            //recorrer la pila
+            while (auxQui != null){
+                Quimico q = auxQui.getData();
+                if(q.getCodigo().equals(codigo)) {
+                    cantidad++;
+                    if (busqueda == null)
+                        busqueda = q;
+                }
+                auxQui = auxQui.getNext();
+            }
+            aux = aux.getNext();
+            // 2) mostrar resultado
+            if(cantidad == 0){
+                System.out.println("No se encontró el producto con código " + codigo);
+            } else {
+                System.out.println("Código: " + codigo);
+                System.out.println("Nombre: " + busqueda.getNombre());
+
+                // si es perecible, mostramos duración
+                if(busqueda instanceof QuimicosSensible){
+                    QuimicosSensible sen = (QuimicosSensible) busqueda;
+                    System.out.println("Duración: " + sen.getMes() + " meses");
+                    System.out.println("Efectividad del producto despues de los"+ sen.getMes() +" es: "+sen.getEfectividad());
+                }
+
+                System.out.println("Cantidad total en el Área: " + cantidad);
+            }
+        }
+    }
+
 
 }

@@ -75,5 +75,9 @@ public class Area {
         }
         return false;
     }
+    public NodoQuimicos getTop()
+    {
+        return top;
+    }
 
 }
