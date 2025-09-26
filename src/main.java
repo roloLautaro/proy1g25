@@ -6,15 +6,20 @@ public class main {
 
         Fabrica mcLautaro = new Fabrica();
         Area nArea = new Area("PPP");
+        Area nArea2 = new Area("PPA");
         Quimico q = new Quimico("IBN","Cl2OH",50.50,5,89);
         Quimico q3 = new Quimico("IBN","Cl2OH",50.50,5,89);
         Quimico q2 = new Quimico("pop","ass",50.12,2,89);
         Quimico q4 = new Quimico("pip","dad",50.55,1,89);
         mcLautaro.agregarArea(nArea);
+        mcLautaro.agregarArea(nArea2);
         mcLautaro.registrarQuimicoEnArea("PPP",q);
+        mcLautaro.registrarQuimicoEnArea("PPA",q3);
+
         mcLautaro.registrarQuimicoEnArea("PPP",q2);
         mcLautaro.registrarQuimicoEnArea("PPP",q4);
 
         mcLautaro.listaDeQuimicos();
+        mcLautaro.listaProductosPorCalificacionDePeligro(5);
     }
 }

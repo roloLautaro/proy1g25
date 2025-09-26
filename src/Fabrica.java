@@ -193,5 +193,36 @@ public class Fabrica {
         }
     }
 
+    public void listaProductosPorCalificacionDePeligro(int calificacion){
+        if(calificacion < 1 || calificacion > 5) {
+            System.out.println("La calificación debe ser un número entero entre 1 y 5.");
+            return;
+        }
+            boolean encontrado = false ;
+            NodoArea auxAr = headArea;
+            while(auxAr != null){
+                Area a = auxAr.getData();
+                NodoQuimicos auxQui = a.getTop();
 
-}
+                while(auxQui != null){
+                    Quimico q = auxQui.getData();
+                    if(q.getPeligro() == calificacion){
+                        if(!encontrado){
+                            System.out.println(" Productos Quimicos con calificación " + calificacion + ":");
+                            encontrado = true;
+                        }
+                        System.out.println(" - " + q.toString() +"| Área: "+a.getCodigo());
+                    }
+                    auxQui = auxQui.getNext();
+                }
+                auxAr = auxAr.getNext();
+            }
+
+            if(!encontrado){
+                System.out.println("No se encontraron productos con calificación " + calificacion);
+            }
+        }
+    }
+
+
+

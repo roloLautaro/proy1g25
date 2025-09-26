@@ -56,4 +56,9 @@ public class Quimico {
         this.efectividad = efectividad;
     }
 
+    public String toString()
+    {
+        return codigo+ " - "+nombre+" - "+peso+" - "+peligro+" - "+efectividad;
+    }
+
 }
