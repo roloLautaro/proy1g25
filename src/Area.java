@@ -1,6 +1,6 @@
 public class Area {
-    public String codigo;// identidicacion del area de producción de quimicos
-    public NodoQuimicos top; // pila de los productos quimcos para cada área
+    private String codigo;// identidicacion del area de producción de quimicos
+    private NodoQuimicos top; // pila de los productos quimcos para cada área
 
     public Area(String codigo)
     {
