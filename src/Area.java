@@ -43,4 +43,37 @@ public class Area {
         }
     }
 
+    public Quimico eliminarQuimicoPorCodigo(String codigo){
+        NodoQuimicos actual = top;
+        NodoQuimicos anterior = null;
+
+        while (actual != null)
+        {
+            if (actual.getData().getCodigo().equals(codigo))
+            {
+                if (anterior == null)
+                {
+                    top = actual.getNext();
+                }else {
+                    anterior.setNext(actual.getNext());
+                }
+                return actual.getData();
+            }
+            anterior = actual;
+            actual = actual.getNext();
+        }
+        return null;
+    }
+    public boolean contiene(String codigo)
+    {
+        NodoQuimicos aux = top;
+        while (aux != null)
+        {
+            if(aux.getData().getCodigo().equals(codigo))
+                return true;
+            aux = aux.getNext();
+        }
+        return false;
+    }
+
 }

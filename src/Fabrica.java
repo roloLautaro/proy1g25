@@ -81,6 +81,61 @@ public class Fabrica {
         }
     }
 
+    // eliminar productos --- si es que se elimina la totalidad de un producto se elimina del listado de headQuimicos
+    public boolean eliminarQuimicoDelArea(String codigoArea, String codigoQuimico)
+    {
+        //1) buscar el área
+        NodoArea aux = headArea;
+        Area encontrado = null; // contenedor
+        while(aux != null)
+        {
+            if (aux.getData().getCodigo().equals(codigoArea)){
+                encontrado = aux.getData();
+                break;
+            }
+            aux = aux.getNext();
+        }
+        if(encontrado == null) return false; // no se encontro
+        //2) eliminar de la area designada
+        Quimico eliminado = encontrado.eliminarQuimicoPorCodigo(codigoQuimico);
+        if (eliminado == null)
+            return false; // no se encontró el producto quimico en esa área
 
+        //3) verificar si exite mas producto en otras áreas
+        if(!existeEnArea(codigoQuimico))
+            eliminarDelListado(codigoQuimico);
+
+        return true;
+    }
+    private boolean existeEnArea(String codigo)
+    {
+        NodoArea aux = headArea;
+        while(aux != null)
+        {
+            Area a = aux.getData();
+            if(a.contiene(codigo))
+                return true;
+            aux = aux.getNext();
+        }
+        return false;
+    }
+    private void eliminarDelListado(String codigo)
+    {
+        NodoQuimicos actual= headQuimicos;
+        NodoQuimicos anterior = null;
+
+        while (actual != null){
+            if(actual.getData().getCodigo().equals(codigo)){
+                if(anterior == null){
+                    headQuimicos = actual.getNext();
+                }else{
+                    anterior.setNext(actual.getNext());
+                }
+                return;
+            }
+            anterior = actual;
+            actual = actual.getNext();
+        }
+    }
 
 }
