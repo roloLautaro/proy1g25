@@ -154,7 +154,7 @@ public class Fabrica {
         return totalQuimcSens;
     }
 
-    public void buscarProducto(String codigo){
+    public void buscarQuimico(String codigo){
         int cantidad = 0;
         Quimico busqueda = null;
 
@@ -174,14 +174,14 @@ public class Fabrica {
                 auxQui = auxQui.getNext();
             }
             aux = aux.getNext();
-            // 2) mostrar resultado
+
             if(cantidad == 0){
                 System.out.println("No se encontró el producto con código " + codigo);
             } else {
                 System.out.println("Código: " + codigo);
                 System.out.println("Nombre: " + busqueda.getNombre());
 
-                // si es perecible, mostramos duración
+
                 if(busqueda instanceof QuimicosSensible){
                     QuimicosSensible sen = (QuimicosSensible) busqueda;
                     System.out.println("Duración: " + sen.getMes() + " meses");

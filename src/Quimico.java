@@ -13,9 +13,6 @@ public class Quimico {
         this.efectividad = efectividad;
     }
 
-    public Quimico() {
-    }
-
     public String getCodigo() {
         return codigo;
     }
